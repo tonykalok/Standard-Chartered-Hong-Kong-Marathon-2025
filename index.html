@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Standard-Chartered-Hong-Kong-Marathon-2025</title>
+  <link href="https://cdn.datatables.net/v/dt/dt-2.2.2/datatables.min.css" rel="stylesheet">
+  <!--<link href="https://cdn.datatables.net/searchbuilder/1.8.2/css/searchBuilder.dataTables.min.css" rel="stylesheet">-->
+  <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+
+<table id="myTable" class="display">
+  <thead>
+    <tr>
+      <th>Race Name</th>
+      <th>Athlete Name</th>
+      <th>Bib</th>
+      <th>Gun Time</th>
+      <th>Chip Time</th>
+      <th>Gender</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="https://cdn.datatables.net/v/dt/dt-2.2.2/datatables.min.js"></script>
+<!--<script src="https://cdn.datatables.net/searchbuilder/1.8.2/js/dataTables.searchBuilder.min.js"></script>-->
+<script>
+  $(document).ready(function() {
+    $.getJSON("https://tonykalok.github.io/Standard-Chartered-Hong-Kong-Marathon-2025/results.min.json", function(data) {
+      $('#myTable').DataTable({
+        responsive: true,
+        lengthMenu: [10, 20, 100],
+        pageLength: 20,
+        data: data,
+        columns: [
+          { data: 'race_name' },
+          { data: 'athlete_name' },
+          { data: 'bib' },
+          { data: 'gunTime' },
+          { data: 'chipTime' },
+          { data: 'gender',
+            render: function ( data, type, row ) {
+              return data === 1 ? "Male" : "Female"; // Assuming 1 is male, you might need to adjust this based on your actual data.
+            }
+          }
+        ]
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
