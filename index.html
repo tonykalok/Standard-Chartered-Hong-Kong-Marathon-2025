@@ -27,9 +27,10 @@
 
 <script src="https://cdn.datatables.net/v/dt/dt-2.2.2/datatables.min.js"></script>
 <!--<script src="https://cdn.datatables.net/searchbuilder/1.8.2/js/dataTables.searchBuilder.min.js"></script>-->
+
 <script>
   $(document).ready(function() {
-    $.getJSON("https://tonykalok.github.io/Standard-Chartered-Hong-Kong-Marathon-2025/results.min.json", function(data) {
+    $.getJSON("https://tonykalok.github.io/Standard-Chartered-Hong-Kong-Marathon-2025/results.json", function(data) {
       $('#myTable').DataTable({
         responsive: true,
         lengthMenu: [10, 20, 100],
