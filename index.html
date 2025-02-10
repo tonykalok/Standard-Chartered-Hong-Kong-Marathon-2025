@@ -28,29 +28,47 @@
 <script src="https://cdn.datatables.net/v/dt/dt-2.2.2/datatables.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+
 <script>
-  $(document).ready(function() {
+$(document).ready(function() {
+  var cachedData = localStorage.getItem('raceData');
+  
+  if (cachedData) {
+    // Decompress the data before using it
+    cachedData = JSON.parse(LZString.decompressFromUTF16(cachedData));
+    initializeDataTable(cachedData);
+  } else {
+    // Fetch data if no cached data exists
     $.getJSON("https://tonykalok.github.io/Standard-Chartered-Hong-Kong-Marathon-2025/results.json", function(data) {
-      $('#myTable').DataTable({
-        responsive: true,
-        lengthMenu: [10, 20, 100],
-        pageLength: 20,
-        data: data,
-        columns: [
-          { data: 'race_name' },
-          { data: 'athlete_name' },
-          { data: 'bib' },
-          { data: 'gunTime' },
-          { data: 'chipTime' },
-          { data: 'gender',
-            render: function ( data, type, row ) {
-              return data === 1 ? "Male" : "Female"; // Assuming 1 is male, you might need to adjust this based on your actual data.
-            }
-          }
-        ]
-      });
+      // Compress and store the data in localStorage
+      var compressedData = LZString.compressToUTF16(JSON.stringify(data));
+      localStorage.setItem('raceData', compressedData);
+      initializeDataTable(data);
     });
-  });
+  }
+
+  function initializeDataTable(data) {
+    $('#myTable').DataTable({
+      responsive: true,
+      lengthMenu: [10, 20, 100],
+      pageLength: 20,
+      data: data,
+      columns: [
+        { data: 'race_name' },
+        { data: 'athlete_name' },
+        { data: 'bib' },
+        { data: 'gunTime' },
+        { data: 'chipTime' },
+        { data: 'gender',
+          render: function (data, type, row) {
+            return data === 1 ? "Male" : "Female"; // Assuming 1 is male, you might need to adjust this based on your actual data.
+          }
+        }
+      ]
+    });
+  }
+});
 </script>
 
 </body>
