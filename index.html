@@ -3,7 +3,7 @@
 <head>
   <title>Standard-Chartered-Hong-Kong-Marathon-2025</title>
   <link href="https://cdn.datatables.net/v/dt/dt-2.2.2/datatables.min.css" rel="stylesheet">
-  <!--<link href="https://cdn.datatables.net/searchbuilder/1.8.2/css/searchBuilder.dataTables.min.css" rel="stylesheet">-->
+  <link href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width" />
 </head>
 <body>
@@ -12,9 +12,9 @@
   <thead>
     <tr>
       <th>Race Name</th>
-      <th>Athlete Name</th>
-      <th>Bib</th>
-      <th>Gun Time</th>
+      <th data-priority="1">Athlete Name</th>
+      <th data-priority="1">Bib</th>
+      <th data-priority="1">Gun Time</th>
       <th>Chip Time</th>
       <th>Gender</th>
     </tr>
@@ -26,7 +26,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script src="https://cdn.datatables.net/v/dt/dt-2.2.2/datatables.min.js"></script>
-<!--<script src="https://cdn.datatables.net/searchbuilder/1.8.2/js/dataTables.searchBuilder.min.js"></script>-->
+<script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.min.js"></script>
 
 <script>
   $(document).ready(function() {
